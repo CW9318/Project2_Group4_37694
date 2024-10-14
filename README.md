@@ -12,5 +12,6 @@ Project merged the announcement part in branch3 and completed in branch2.
 2. Initialize variables as followed:
 ACCESS_TOKEN = X
 GOOGLE_API_KEY = Y
-3. Replace X Y Z with your generated Carmen API and google cloud API, respectively
+SEARCH_ENGINE_ID = Z
+4. Replace X Y Z with your generated Carmen API, google cloud API, search engine ID, respectively
 
