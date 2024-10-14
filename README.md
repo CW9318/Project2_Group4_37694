@@ -6,3 +6,12 @@ Ask the user to input key words and number of images to be generated.
 Use Google API & Search Engine ID  
 Google Cloud consule & Programmable Search Engine (provided by Google) to generate an HTML file with information and images.  
 Project merged the announcement part in branch3 and completed in branch2.  
+
+## SETUP
+1. Create a .env file
+2. Initialize variables as followed:
+ACCESS_TOKEN = X
+GOOGLE_API_KEY = Y
+SEARCH_ENGINE_ID = Z
+3. Replace X Y Z with your generated Carmen API, google cloud API, and programmable search engine api, respectively
+
