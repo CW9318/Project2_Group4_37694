@@ -11,7 +11,7 @@ require 'json'
 API_TOKEN = ENV['ACCESS_TOKEN']
 CANVAS_API = 'https://osu.instructure.com/api/v1'
 GOOGLE_API_KEY = ENV['GOOGLE_API_KEY']
-SEARCH_ENGINE_ID = ENV['SEARCH_ENGINE_ID']
+# SEARCH_ENGINE_ID = ENV['SEARCH_ENGINE_ID']
 GOOGLE_CUSTOM_SEARCH_URL = 'https://www.googleapis.com/customsearch/v1'
 
 
@@ -202,28 +202,28 @@ def html_announcement(course_id, course_name, announcements)
 end
 
 # fetch info&images using Google Custom Search API
-def fetch_images(input, nums)
-  response = HTTParty.get(
-    GOOGLE_CUSTOM_SEARCH_URL,
-    query: {
-      key: GOOGLE_API_KEY,
-      cx: SEARCH_ENGINE_ID,
-      # key words to fetch
-      q: input,
-      searchType: 'image',
-      # number of images to fetch
-      num: nums
-    }
-  )
-  # Check if the request was successful
-  if response.code == 200
-    images = JSON.parse(response.body)['items']
-    return images
-  else
-    puts "Error: Unable to fetch images."
-    return []
-  end
-end
+# def fetch_images(input, nums)
+#   response = HTTParty.get(
+#     GOOGLE_CUSTOM_SEARCH_URL,
+#     query: {
+#       key: GOOGLE_API_KEY,
+#       cx: SEARCH_ENGINE_ID,
+#       # key words to fetch
+#       q: input,
+#       searchType: 'image',
+#       # number of images to fetch
+#       num: nums
+#     }
+#   )
+#   # Check if the request was successful
+#   if response.code == 200
+#     images = JSON.parse(response.body)['items']
+#     return images
+#   else
+#     puts "Error: Unable to fetch images."
+#     return []
+#   end
+# end
 
 def html_search(images, item)
   html_content = <<-HTML
@@ -254,14 +254,14 @@ def html_search(images, item)
       <div class="image-grid">
   HTML
 
-  images.each do |image|
-    html_content += <<-HTML
-      <div class="image-item">
-        <img src="#{image['link']}" alt="#{item}">
-        <p>#{image['title']}</p>
-      </div>
-    HTML
-  end
+  # images.each do |image|
+  #   html_content += <<-HTML
+  #     <div class="image-item">
+  #       <img src="#{image['link']}" alt="#{item}">
+  #       <p>#{image['title']}</p>
+  #     </div>
+  #   HTML
+  # end
 
   html_content += <<-HTML
       </div>
@@ -313,26 +313,26 @@ def main
     puts "Invalid course ID.\n\n"
   end
   # ask check or not
-  puts "Based on the courses syllabus and announcements"
-  puts "Would you like to search info and images on the internet? (y/n)"
-  search_check = gets.chomp.downcase
+#   puts "Based on the courses syllabus and announcements"
+#   puts "Would you like to search info and images on the internet? (y/n)"
+#   search_check = gets.chomp.downcase
 
-  if search_check == 'y'
-    puts "Input some key words you want to search for: "
-    item = gets.chomp
-    puts "How many images and information do you want to generate: "
-    nums = gets.chomp.to_i
+#   if search_check == 'y'
+#     puts "Input some key words you want to search for: "
+#     item = gets.chomp
+#     puts "How many images and information do you want to generate: "
+#     nums = gets.chomp.to_i
 
-    images = fetch_images(item, nums)
+#     images = fetch_images(item, nums)
 
-    if images.any?
-      html_search(images, item)
-    else
-      puts "No images found or unable to fetch data."
-    end
-  else
-    puts "You chose not to search."
-  end
+#     if images.any?
+#       html_search(images, item)
+#     else
+#       puts "No images found or unable to fetch data."
+#     end
+#   else
+#     puts "You chose not to search."
+#   end
 end
 
-main
+ main
